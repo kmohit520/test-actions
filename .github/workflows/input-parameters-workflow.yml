@@ -1,0 +1,35 @@
+name: input-parameters
+on:
+  workflow_dispatch:
+    inputs:
+      org:
+        description: 'Organization'
+        required: false
+        type: string
+      envgrp:
+        description: 'Environment Group'
+        required: false
+        type: string
+      bucket:
+        description: 'Bucket'
+        required: true
+        default: 'keng-bucket'
+        type: choice
+        options:
+        - keng-bucket
+        - staging-bucket
+      tag:
+        description: 'Build Tag'
+        required: true
+        default: '09.05'
+        type: string
+      delta:
+        description: 'Delta Publishing'
+        required: true
+        type: string
+jobs:
+  input-parameters:
+    runs-on: self-hosted
+    steps:
+      - name: print input parameters
+        run: echo ${{ github.event.inputs.org }}
